@@ -3,6 +3,7 @@
 <head>
   <title>KaelCore Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <script src="https://alcdn.msauth.net/browser/2.37.0/js/msal-browser.min.js"></script>
   <style>
     body {
       background-color: #0e0e0e;
@@ -16,10 +17,42 @@
       font-size: 1.2em;
       opacity: 0.8;
     }
+    .logout-button {
+      margin-top: 3em;
+      padding: 0.6em 1.2em;
+      background-color: transparent;
+      border: 2px solid #00ffe0;
+      color: #00ffe0;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .logout-button:hover {
+      background-color: #00ffe0;
+      color: #0e0e0e;
+    }
   </style>
 </head>
 <body>
   <h1>Welcome to KaelCore</h1>
   <p class="relic">Access granted. Relics await.</p>
+
+  <button class="logout-button" onclick="logout()">Logout</button>
+
+  <script>
+    const msalInstance = new msal.PublicClientApplication({
+      auth: {
+        clientId: "YOUR_CLIENT_ID",
+        authority: "https://YOUR_TENANT_NAME.b2clogin.com/YOUR_TENANT_NAME.onmicrosoft.com/B2C_1_signupsignin",
+        redirectUri: "https://kaelcore.azurewebsites.net/login.html"
+      }
+    });
+
+    function logout() {
+      msalInstance.logoutRedirect();
+    }
+  </script>
 </body>
 </html>
