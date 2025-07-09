@@ -1,11 +1,10 @@
 # License Notice
 
-Kaelcore is a private project under active development.
+Kaelcore is a proprietary project under active development.
 
-This repository is not licensed for public use, redistribution, or modification.  
-All content, code, and assets are © HellorHighWaterSolutions unless otherwise stated.
+This repository is provided for **viewing and sponsorship purposes only**.  
+No license is granted to copy, modify, distribute, or reuse any part of this codebase.
 
-No license is granted at this time.  
-Public release is planned upon reaching a future milestone.
+All rights reserved © HellorHighWaterSolutions.
 
-For inquiries, contact the author directly.
+For licensing inquiries or early access, contact the author directly.
