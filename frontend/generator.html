@@ -39,6 +39,7 @@
   </style>
 </head>
 <body>
+  
   <h2>Recent Creations</h2>
 <div id="gallery" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1em; margin-top: 1em;"></div>
 
@@ -65,46 +66,53 @@
       `;
     }
   </script>
-  <script>
+<script>
 async function loadGallery() {
   const containerUrl = "https://kaelimages.blob.core.windows.net/relics?restype=container&comp=list";
-  const response = await fetch(containerUrl);
-  const xml = await response.text();
-  const parser = new DOMParser();
-  const xmlDoc = parser.parseFromString(xml, "application/xml");
-  const blobs = xmlDoc.getElementsByTagName("Name");
+  try {
+    const response = await fetch(containerUrl);
+    const xml = await response.text();
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xml, "application/xml");
+    const names = Array.from(xmlDoc.getElementsByTagName("Name"))
+      .map(n => n.textContent.trim())
+      .filter(name => /\.(jpg|jpeg|png)$/i.test(name));
 
-  const gallery = document.getElementById("gallery");
-  for (let i = blobs.length - 1; i >= Math.max(0, blobs.length - 6); i--) {
-    const blobName = blobs[i].textContent;
-    const img = document.createElement("img");
-    img.src = `https://kaelimages.blob.core.windows.net/relics/${blobName}`;
-    img.alt = blobName;
-    img.style.width = "150px";
-    img.style.border = "2px solid #00ffe0";
-    img.style.borderRadius = "6px";
+    console.log("🧩 Found blobs:", names);
 
-    const name = blobName
-      .replace(/\.[^/.]+$/, "") // remove file extension
-      .replace(/-/g, " ")       // replace dashes with spaces
-      .replace(/\b\w/g, c => c.toUpperCase()); // capitalize words
+    const gallery = document.getElementById("gallery");
+    names.slice(-6).reverse().forEach(blobName => {
+      const img = document.createElement("img");
+      img.src = `https://kaelimages.blob.core.windows.net/relics/${blobName}`;
+      img.alt = blobName;
+      img.style.width = "150px";
+      img.style.border = "2px solid #00ffe0";
+      img.style.borderRadius = "6px";
 
-    const container = document.createElement("div");
-    container.style.textAlign = "center";
+      const name = blobName
+        .replace(/\.[^/.]+$/, "")
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, c => c.toUpperCase());
 
-    const caption = document.createElement("p");
-    caption.textContent = name;
-    caption.style.marginTop = "0.5em";
-    caption.style.fontSize = "0.9em";
+      const container = document.createElement("div");
+      container.style.textAlign = "center";
 
-    container.appendChild(img);
-    container.appendChild(caption);
-    gallery.appendChild(container);
+      const caption = document.createElement("p");
+      caption.textContent = name;
+      caption.style.marginTop = "0.5em";
+      caption.style.fontSize = "0.9em";
+
+      container.appendChild(img);
+      container.appendChild(caption);
+      gallery.appendChild(container);
+    });
+  } catch (err) {
+    console.error("❌ Failed to load gallery:", err);
   }
 }
-
 window.onload = loadGallery;
 </script>
+
 
 </body>
 </html>
