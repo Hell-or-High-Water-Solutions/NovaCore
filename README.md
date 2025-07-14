@@ -1,6 +1,6 @@
 # NovaCore
 
-**NovaCore** is a private mythos engine in active development. It blends symbolic language, AI memory, and dynamic image rendering into a living forge of creation. This repository is currently closed-source while the system evolves toward a public release milestone.
+**NovaCore** is a private mythos engine in active development. It blends symbolic language, AI memory, and dynamic asset rendering into a living forge of creation. This repository is currently closed-source while the system evolves toward a public release milestone.
 
 ------
 
