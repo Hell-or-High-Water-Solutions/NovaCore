@@ -33,6 +33,6 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: kaelcore
+          app-name: novacore
           slot-name: production
           package: frontend.zip
