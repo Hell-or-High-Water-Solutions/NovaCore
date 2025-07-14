@@ -1,6 +1,6 @@
 # License Notice
 
-Kaelcore is a proprietary project under active development.
+NovaCore is a proprietary project under active development.
 
 This repository is provided for **viewing and sponsorship purposes only**.  
 No license is granted to copy, modify, distribute, or reuse any part of this codebase.
